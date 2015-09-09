@@ -38,7 +38,7 @@ class AppController extends Controller
     {
       {
         $this->loadComponent('Flash');
-        $this->loadComponent('Auth', ['authenticate' => ['Form' => ['fields' => ['username' => 'email','password' => 'password']]],
+        $this->loadComponent('Auth', ['authorize' => 'Controller','authenticate' => ['Form' => ['fields' => ['username' => 'email','password' => 'password']]],
                                                                                         'loginAction' => [
                                                                                         'controller' => 'Users',
                                                                                         'action' => 'login']]);
@@ -46,5 +46,10 @@ class AppController extends Controller
           // continues to work.
           $this->Auth->allow(['display']);
         }
+    }
+
+    public function isAuthorized($user)
+    {
+      return false;
     }
 }
